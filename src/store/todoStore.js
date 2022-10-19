@@ -5,7 +5,7 @@ export const todoStore = defineStore('todoStore', {
     state: () => {
         return {
             todos: [],
-            todoEdit: [],
+            todoEdit: null,
         }
     },
     getters: {
@@ -67,7 +67,7 @@ export const todoStore = defineStore('todoStore', {
             }
         },
         cleanTodoForm(){
-            this.todoEdit = []
+            this.todoEdit = null
         }
     },
 })

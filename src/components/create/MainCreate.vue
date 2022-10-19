@@ -16,7 +16,6 @@
             <input class="btn btn-primary" type="submit" value="Send">
             <input class="btn btn-danger" type="reset" value="Clean">
         </div>
-        {{createTodo.description}}
 </form>
     </div>
 </template>
@@ -77,11 +76,13 @@ export default {
 
             if (this.createTodo.id) {
                 this.TodoStoreGet.update(this.createTodo)
+                console.log('updatdted')
                 this.resertForm()
                 this.$router.push({ name: 'Main' })
             }
             else {
                 this.TodoStoreGet.add(this.createTodo)
+                console.log('added')
                 this.resertForm()
                 this.$router.push({ name: 'Main' })
             }
