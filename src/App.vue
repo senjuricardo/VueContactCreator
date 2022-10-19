@@ -3,7 +3,7 @@ import {RouterView, RouterLink} from 'vue-router'
 </script>
 
 <template>
-<button type="button" class="btn btn-primary"> <RouterLink class="text-light text-decoration-none m-2" :to="{name: 'Main'}">Manage Users</RouterLink> </button>
+<!-- <button type="button" class="btn btn-primary"> <RouterLink class="text-light text-decoration-none m-2" :to="{name: 'Main'}">Manage Users</RouterLink> </button> -->
 
  <router-view></router-view>
  <footer>Ricardo Sousa T0121085</footer>
