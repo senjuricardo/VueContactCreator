@@ -19,7 +19,7 @@
 
 <script>
 
-import { mapState } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import { todoStore } from '../../store/todoStore';
 export default {
     setup() {
@@ -35,6 +35,7 @@ export default {
     mounted() {
 
         try {
+            this.createListLocalStore();
             this.showTask = todoStore().getData(this.$route.params.id)
         } catch (error) {
             console.error(error)
@@ -43,6 +44,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(todoStore, ['createListLocalStore']),
         deleteData() {
             if (this.showTask.state == "Uncompleted") {
                 this.todoStoreget.delete(this.showTask.id)

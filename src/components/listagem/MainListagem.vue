@@ -15,7 +15,7 @@
         <h5>{{item.description}}</h5>
         <button @click="goToDetail(item)" type="button" class="btn btn-info">Details</button>
     </div>
-    {{showTodos}}
+    <h1 v-if="!filter.length ">tasks not found!</h1>
 </template>
 
 <script>
@@ -34,22 +34,26 @@ export default {
         }
     },
     computed: {
-        ...mapState(todoStore, ['getTodos', 'getLengthTodo', 'getCompletedTodo']),
+        ...mapState(todoStore, ['getTodos', 'getLengthTodo', 'getCompletedTodo', 'getUncompletedTodo']),
         changeValue() {
 
             return
         }
     },
+    
     mounted(){
+        this.createListLocalStore(),
         this.changeShow('All')
     },
     methods: {
-        ...mapActions(todoStore, ['updateStatus']),
+        ...mapActions(todoStore, ['updateStatus','createListLocalStore']),
         changeShow(changeValue) {
             if (changeValue == "All")
              return   this.filter= this.getTodos
             if (changeValue == "Completed")
             return   this.filter= this.getCompletedTodo
+            if (changeValue == "Uncompleted")
+            return   this.filter= this.getUncompletedTodo
         },
         goToCreate() {
             this.$router.push({ name: 'Create' })

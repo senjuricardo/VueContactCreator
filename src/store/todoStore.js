@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { defineStore } from 'pinia';
+import Todo from '../models/Todo'
 
 export const todoStore = defineStore('todoStore', {
     state: () => {
@@ -13,6 +14,7 @@ export const todoStore = defineStore('todoStore', {
         getUserEdit: (state) => state.userEdit,
         getLengthTodo: (state) => state.todos.length,
         getCompletedTodo: (state) => state.todos.filter(todo => todo.state == "Completed"),
+        getUncompletedTodo: (state) => state.todos.filter(todo => todo.state == "Uncompleted"),
         getTodoEdit: (state) => state.todoEdit
     },
     actions: {
@@ -20,8 +22,7 @@ export const todoStore = defineStore('todoStore', {
             try {
                 todo.id = uuidv4();
                 this.todos.push(todo);
-
-
+                localStorage.setItem('taskArray', JSON.stringify(this.todos))
             } catch (error) {
                 throw error
             }
@@ -30,6 +31,7 @@ export const todoStore = defineStore('todoStore', {
             try {
                 this.todos[this.findIndex(todo.id)] = todo
                 this.todoEdit = todo
+                localStorage.setItem('taskArray', JSON.stringify(this.todos))
             } catch (error) {
                 throw error
             }
@@ -37,6 +39,7 @@ export const todoStore = defineStore('todoStore', {
         delete(id) {
             try {
                 this.todos.splice(this.findIndex(id), 1)
+                localStorage.setItem('taskArray', JSON.stringify(this.todos))
             } catch (error) {
                 throw error
             }
@@ -52,6 +55,7 @@ export const todoStore = defineStore('todoStore', {
             try {
               const getSameTodo=  this.todos.find(todo => todo.id == id)
               getSameTodo.state = getSameTodo.state == "Completed" ? "Uncompleted" : "Completed" 
+              localStorage.setItem('taskArray', JSON.stringify(this.todos))
             } catch (error) {
                 
             }
@@ -68,6 +72,10 @@ export const todoStore = defineStore('todoStore', {
         },
         cleanTodoForm(){
             this.todoEdit = null
+        },
+        createListLocalStore(){
+            const storeObject = JSON.parse(localStorage.getItem('taskArray'))
+            this.todos = storeObject.map(item => new Todo(item.id,item.description,item.state)) 
         }
     },
 })
