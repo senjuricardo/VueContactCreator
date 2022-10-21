@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import { todoStore } from '../../store/todoStore'
-import Todo from '../../models/Todo'
+import { todoStore } from '../../store/ContactStore'
+import Todo from '../../models/Contact'
 import isEmptyValue from '../../validators/isEmptyValue'
 export default {
     setup() {

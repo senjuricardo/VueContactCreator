@@ -20,7 +20,7 @@
 <script>
 
 import { mapActions, mapState } from 'pinia';
-import { todoStore } from '../../store/todoStore';
+import { todoStore } from '../../store/ContactStore';
 export default {
     setup() {
         // initialize the store
