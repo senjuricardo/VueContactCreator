@@ -67,13 +67,7 @@ export default {
                 this.formContact.nameError = true
                 return
             }
-            // Object.entries(this.createContact).forEach(contact => {
-            //     const [key, value] = contact
-            //     if (isEmptyValue.exec(value) && key != 'id')
-            //         this.formContact[`${key}Error`] = true
-            // });
-            // if (Object.values(this.formContact).some(value => value == true))
-            //     return
+         
             if (this.createContact.id) {
                 this.ContacttoreGet.update(this.createContact)
                 this.ContacttoreGet.cleanTodoForm()
