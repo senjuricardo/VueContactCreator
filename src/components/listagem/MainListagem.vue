@@ -31,20 +31,11 @@ export default {
         ...mapState(ContactStore, ['getContacts']),
     },
     
-    // mounted(){
-    //     this.createListLocalStore(),
-    //     this.changeShow('All')
-    // },
+    mounted(){
+        this.createListLocalStore()
+    },
     methods: {
         ...mapActions(ContactStore, ['updateStatus','createListLocalStore']),
-        // changeShow(changeValue) {
-        //     if (changeValue == "All")
-        //      return   this.filter= this.getTodos
-        //     if (changeValue == "Completed")
-        //     return   this.filter= this.getCompletedTodo
-        //     if (changeValue == "Uncompleted")
-        //     return   this.filter= this.getUncompletedTodo
-        // },
         goToCreate() {
             this.$router.push({ name: 'Create' })
         },

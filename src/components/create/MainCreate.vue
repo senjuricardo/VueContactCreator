@@ -34,7 +34,6 @@ import Contact from '../../models/Contact'
 import isEmptyValue from '../../validators/isEmptyValue'
 export default {
     setup() {
-        // initialize the store
         const ContacttoreGet = ContactStore()
         return { ContacttoreGet }
     },
@@ -42,8 +41,7 @@ export default {
         return {
             editToolID: -1,
             isUpdate: false,
-            createContact:  new Contact(),
-            // this.TodoStoreGet.getTodoEdit? this.TodoStoreGet.getTodoEdit :
+            createContact: this.ContacttoreGet.getContactEdit ? this.ContacttoreGet.getContactEdit : new Contact(),
             formContact: {
                 nameError: false,
             }
@@ -75,18 +73,18 @@ export default {
             if (Object.values(this.formContact).some(value => value == true))
                 return
 
-            // if (this.createTodo.id) {
-            //     this.ContacttoreGet.update(this.createTodo)
-            //     console.log('updatdted')
-            //     this.resertForm()
-            //     this.$router.push({ name: 'Main' })
-            // }
-            // else {
+            if (this.createContact.id) {
+                this.ContacttoreGet.update(this.createContact)
+                console.log('updatdted')
+                this.resertForm()
+                this.$router.push({ name: 'Main' })
+            }
+            else {
                 this.ContacttoreGet.add(this.createContact)
                 console.log('added')
                 this.resertForm()
                 this.$router.push({ name: 'Main' })
-            // }
+             }
         },
         resertForm() {
             this.createContact = new Contact();

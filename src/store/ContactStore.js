@@ -48,21 +48,12 @@ export const ContactStore = defineStore('ContactStore', {
                 throw error
             }
         },
-        // updateStatus(id){
-        //     try {
-        //       const getSameTodo=  this.todos.find(todo => todo.id == id)
-        //       getSameTodo.state = getSameTodo.state == "Completed" ? "Uncompleted" : "Completed" 
-        //       localStorage.setItem('taskArray', JSON.stringify(this.todos))
-        //     } catch (error) {
-                
-        //     }
-        // },
         getData(id) {
             try {
                 const contactFound = this.contacts.find(contact => contact.id == id)
                 if (contactFound == null)
                     throw new Error('contact not found!')
-                return todoFound
+                return contactFound
             } catch (error) {
                 throw error
             }
@@ -70,9 +61,9 @@ export const ContactStore = defineStore('ContactStore', {
         cleanTodoForm(){
             this.contactEdit = null
         },
-        // createListLocalStore(){
-        //     const storeObject = JSON.parse(localStorage.getItem('contactArray'))
-        //     this.contacts = storeObject.map(item => new Contact(item.id,item.name,item.telemovel,item.email, item.morada)) 
-        // }
+        createListLocalStore(){
+            const storeObject = JSON.parse(localStorage.getItem('contactArray'))
+            this.contacts = storeObject.map(item => new Contact(item.id,item.name,item.telemovel,item.email, item.morada)) 
+        }
     },
 })
