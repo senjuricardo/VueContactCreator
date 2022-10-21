@@ -12,7 +12,6 @@ export const ContactStore = defineStore('ContactStore', {
     getters: {
         getContacts: (state) => state.contacts,
         getContactEdit: (state) => state.contactEdit,
-        getTodoEdit: (state) => state.todoEdit
     },
     actions: {
         add(contact) {

@@ -1,6 +1,6 @@
 <template>
     <div class="border border-white p-5">
-        <form @submit.prevent="sendContact" @reset="resertForm">
+        <form @submit.prevent="sendContact" @reset="clearForm">
         <div class="form-group p-2">
             <input class="form-control" type="text" id="name" ref="name" name="name"
                 placeholder="name" v-model="createContact.name">
@@ -25,6 +25,7 @@
             <input class="btn btn-danger" type="reset" value="Clean">
         </div> 
 </form>
+{{createContact}}
     </div>
 </template>
 
@@ -56,25 +57,26 @@ export default {
         },
     },
     computed: {
-        getTodos() {
-            return this.ContactStore.getTodos
-        },
-        // changeTitleButoon(){
-        //     return this.createUser.id ? 'Update' :'Send'
-        // }
+        // getContacts() {
+        //     return this.ContactStore.getContacts
+        // },
     },
     methods: {
         sendContact(e) {
-            Object.entries(this.createContact).forEach(contact => {
-                const [key, value] = contact
-                if (isEmptyValue.exec(value) && key != 'id')
-                    this.formContact[`${key}Error`] = true
-            });
-            if (Object.values(this.formContact).some(value => value == true))
+            if(isEmptyValue.exec(this.createContact.name)){
+                this.formContact.nameError = true
                 return
-
+            }
+            // Object.entries(this.createContact).forEach(contact => {
+            //     const [key, value] = contact
+            //     if (isEmptyValue.exec(value) && key != 'id')
+            //         this.formContact[`${key}Error`] = true
+            // });
+            // if (Object.values(this.formContact).some(value => value == true))
+            //     return
             if (this.createContact.id) {
                 this.ContacttoreGet.update(this.createContact)
+                this.ContacttoreGet.cleanTodoForm()
                 console.log('updatdted')
                 this.resertForm()
                 this.$router.push({ name: 'Main' })
@@ -88,14 +90,13 @@ export default {
         },
         resertForm() {
             this.createContact = new Contact();
-            //  this.TodoStoreGet.cleanTodoForm
-            //     this.formUser.firstNameError= false;
-            //     this.formUser.lastNameError= false;
-            //     this.formUser.ageError= false;
-            //     this.formUser.genderError= false
-            // this.formUser = {}
-
         },
+        clearForm(){
+            this.createContact.name = '',
+            this.createContact.email='',
+            this.createContact.telemovel='',
+            this.createContact.morada=''
+        }
     }
 }
 </script>

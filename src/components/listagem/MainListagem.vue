@@ -8,7 +8,7 @@
         <h5>{{item.name}}</h5>
         <button @click="goToDetail(item)" type="button" class="btn btn-info">Ver</button>
     </div> 
-    <h1 v-if="!getContacts.length ">Contacts not found!</h1>
+    <h5 v-if="!getContacts.length ">Contacts not found!</h5>
     
 </template>
 

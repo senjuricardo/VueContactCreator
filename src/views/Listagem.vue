@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen border border-white p-5">
+    <div class=" border border-white p-5 h-fit">
         <HeaderListagem></HeaderListagem> 
         <MainListagem></MainListagem>
     </div>
