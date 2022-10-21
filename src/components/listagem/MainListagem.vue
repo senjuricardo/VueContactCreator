@@ -1,14 +1,12 @@
 <template>
-    <div class="flex justify-around">
-        <div class="flex gap-2">
+    <div >   
             <button @click="goToCreate" type="button" class="btn btn-info">Adicionar</button>
-        </div>
     </div>
     <div v-for="(item) in getContacts" class="flex mt-4 items-center justify-around">
         <h5>{{item.name}}</h5>
         <button @click="goToDetail(item)" type="button" class="btn btn-info">Ver</button>
     </div> 
-    <h5 v-if="!getContacts.length ">Contacts not found!</h5>
+    <h5 class="mt-2" v-if="!getContacts.length ">Contacts not found!</h5>
     
 </template>
 

@@ -1,19 +1,20 @@
 <template>
     <div class="border border-white p-5">
-        <HeaderListagem></HeaderListagem>
+       <Header></Header>
         <MainCreate></MainCreate>
     </div>
 </template>
 
 <script>
-import HeaderListagem from '../components/listagem/HeaderListagem.vue';
+
 
 import MainCreate from '../components/create/MainCreate.vue';
+import Header from '../components/widgets/Header.vue';
 export default {
     setup() {
         return {};
     },
-    components: { HeaderListagem, MainCreate }
+    components: { MainCreate, Header }
 }
 </script>
 

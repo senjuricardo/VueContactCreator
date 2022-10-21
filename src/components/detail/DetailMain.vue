@@ -1,7 +1,7 @@
 <template>
     <div v-if="showContact" class="border border-white d-flex flex-column p-5">
         <div class="d-flex flex-row justify-content-end align-items-end mt-4 gap-4">
-            <div> <button @click="goToMain" class="border border-white bg-info rounded">Retroceder</button></div>
+            <div> <button @click="goToMain" class="border border-white bg-Secondary rounded">Retroceder</button></div>
             <div> <button @click="editData(showContact)" class="border border-white bg-info rounded">Editar</button></div>
             <div><button @click="deleteData" class="border border-white bg-danger rounded">Eliminar</button></div>
         </div>
