@@ -1,17 +1,15 @@
 <template>
     <div class="flex justify-around">
-        <p></p>
         <div class="flex gap-2">
             <button @click="goToCreate" type="button" class="btn btn-info">Adicionar</button>
         </div>
     </div>
-    <div v-for="(item) in filter" class="flex mt-4 items-center justify-around">
-        <input @click="updateStatus(item.id)" :checked="item.state == 'Completed'" class="form-check-input"
-            type="checkbox" name="flexRadioDefault" id="{{item.id}}">
-        <h5>{{item.description}}</h5>
-        <button @click="goToDetail(item)" type="button" class="btn btn-info">Details</button>
-    </div>
-    <h1 v-if="!filter.length ">tasks not found!</h1>
+    <div v-for="(item) in getContacts" class="flex mt-4 items-center justify-around">
+        <h5>{{item.name}}</h5>
+        <button @click="goToDetail(item)" type="button" class="btn btn-info">Ver</button>
+    </div> 
+    <h1 v-if="!getContacts.length ">Contacts not found!</h1>
+    
 </template>
 
 <script>
@@ -33,10 +31,10 @@ export default {
         ...mapState(ContactStore, ['getContacts']),
     },
     
-    mounted(){
-        this.createListLocalStore(),
-        this.changeShow('All')
-    },
+    // mounted(){
+    //     this.createListLocalStore(),
+    //     this.changeShow('All')
+    // },
     methods: {
         ...mapActions(ContactStore, ['updateStatus','createListLocalStore']),
         // changeShow(changeValue) {

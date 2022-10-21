@@ -70,9 +70,9 @@ export const ContactStore = defineStore('ContactStore', {
         cleanTodoForm(){
             this.contactEdit = null
         },
-        createListLocalStore(){
-            const storeObject = JSON.parse(localStorage.getItem('contactArray'))
-            this.contacts = storeObject.map(item => new Contact(item.id,item.name,item.telemovel,item.email, item.morada)) 
-        }
+        // createListLocalStore(){
+        //     const storeObject = JSON.parse(localStorage.getItem('contactArray'))
+        //     this.contacts = storeObject.map(item => new Contact(item.id,item.name,item.telemovel,item.email, item.morada)) 
+        // }
     },
 })

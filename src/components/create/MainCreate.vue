@@ -1,94 +1,95 @@
 <template>
     <div class="border border-white p-5">
-        <form @submit.prevent="sendTodo" @reset="resertForm">
+        <form @submit.prevent="sendContact" @reset="resertForm">
         <div class="form-group p-2">
-            <input class="form-control" type="text" id="description" ref="description" name="description"
-                placeholder="description" v-model="createTodo.description">
-            <div v-if="formTodo.descriptionError" class="errors">description is required!</div>
+            <input class="form-control" type="text" id="name" ref="name" name="name"
+                placeholder="name" v-model="createContact.name">
+            <div v-if="formContact.nameError" class="errors">name is required!</div>
         </div>
-        <div class="flex gap-3">
-            <p>Completed?</p>
-            <input name="Completed" type="radio" id="one" value="Completed" v-model="createTodo.state" />
-            <input  name="Uncompleted" type="radio" id="two" value="Uncompleted" v-model="createTodo.state" />
-            <div v-if="formTodo.stateError" class="errors">state is required!</div>
+
+        <div class="form-group p-2">
+            <input class="form-control" type="number" id="telemovel" ref="telemovel" name="telemovel"
+                placeholder="telemovel" v-model="createContact.telemovel">
         </div>
+        <div class="form-group p-2">
+            <input class="form-control" type="email" id="email" ref="email" name="email"
+                placeholder="email" v-model="createContact.email">
+        </div>
+        <div class="form-group p-2">
+            <input class="form-control" type="text" id="morada" ref="morada" name="morada"
+                placeholder="morada" v-model="createContact.morada">
+        </div>
+
         <div class="flex gap-2 justify-end">
             <input class="btn btn-primary" type="submit" value="Send">
             <input class="btn btn-danger" type="reset" value="Clean">
-        </div>
+        </div> 
 </form>
     </div>
 </template>
 
 <script>
-import { todoStore } from '../../store/ContactStore'
-import Todo from '../../models/Contact'
+import { ContactStore } from '../../store/ContactStore'
+import Contact from '../../models/Contact'
 import isEmptyValue from '../../validators/isEmptyValue'
 export default {
     setup() {
         // initialize the store
-        const TodoStoreGet = todoStore()
-        return { TodoStoreGet }
+        const ContacttoreGet = ContactStore()
+        return { ContacttoreGet }
     },
     data() {
         return {
             editToolID: -1,
             isUpdate: false,
-            createTodo: this.TodoStoreGet.getTodoEdit? this.TodoStoreGet.getTodoEdit : new Todo(),
-            // this.todoStore.getUserEdit? this.userStoreTeste.getUserEdit :
-            formTodo: {
-                descriptionError: false,
-                stateError: false,
+            createContact:  new Contact(),
+            // this.TodoStoreGet.getTodoEdit? this.TodoStoreGet.getTodoEdit :
+            formContact: {
+                nameError: false,
             }
         }
     },
     watch: {
-        'createTodo.description': function () {
-            if (isEmptyValue.exec(this.createTodo.description))
-                this.formTodo.descriptionError = true
+        'createContact.name': function () {
+            if (isEmptyValue.exec(this.createContact.name))
+                this.formContact.nameError = true
             else
-                this.formTodo.descriptionError = false
+                this.formContact.nameError = false
         },
-        'createTodo.state': function () {
-            if (isEmptyValue.exec(this.createTodo.state))
-                this.formTodo.stateError = true
-            else
-                this.formTodo.stateError = false
-        }
     },
     computed: {
         getTodos() {
-            return this.todoStore.getTodos
+            return this.ContactStore.getTodos
         },
         // changeTitleButoon(){
         //     return this.createUser.id ? 'Update' :'Send'
         // }
     },
     methods: {
-        sendTodo(e) {
-            Object.entries(this.createTodo).forEach(todo => {
-                const [key, value] = todo
+        sendContact(e) {
+            Object.entries(this.createContact).forEach(contact => {
+                const [key, value] = contact
                 if (isEmptyValue.exec(value) && key != 'id')
-                    this.formTodo[`${key}Error`] = true
+                    this.formContact[`${key}Error`] = true
             });
-            if (Object.values(this.formTodo).some(value => value == true))
+            if (Object.values(this.formContact).some(value => value == true))
                 return
 
-            if (this.createTodo.id) {
-                this.TodoStoreGet.update(this.createTodo)
-                console.log('updatdted')
-                this.resertForm()
-                this.$router.push({ name: 'Main' })
-            }
-            else {
-                this.TodoStoreGet.add(this.createTodo)
+            // if (this.createTodo.id) {
+            //     this.ContacttoreGet.update(this.createTodo)
+            //     console.log('updatdted')
+            //     this.resertForm()
+            //     this.$router.push({ name: 'Main' })
+            // }
+            // else {
+                this.ContacttoreGet.add(this.createContact)
                 console.log('added')
                 this.resertForm()
                 this.$router.push({ name: 'Main' })
-            }
+            // }
         },
         resertForm() {
-            this.createTodo = new Todo();
+            this.createContact = new Contact();
             //  this.TodoStoreGet.cleanTodoForm
             //     this.formUser.firstNameError= false;
             //     this.formUser.lastNameError= false;
@@ -102,10 +103,5 @@ export default {
 </script>
 
 <style>
-input[name="Uncompleted"] {
-    accent-color: red;
-}
-input[name="completed"] {
-    accent-color: blue;
-}
+
 </style>

@@ -5,7 +5,7 @@ class Contact{
     //     this.state = null
     //     this.date = new Date().toLocaleString()
     // }
-    constructor(id=null, name='', telemovel='', email='', ){
+    constructor(id=null, name='', telemovel='', email='', morada='' ){
         this.id = id
         this.name = name
         this.telemovel = telemovel
